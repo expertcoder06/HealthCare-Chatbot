@@ -1,3 +1,11 @@
+# SQLite fix for Streamlit Cloud (ChromaDB needs SQLite >= 3.35)
+import sys
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 import streamlit as st
 from chatbot_engine import process_patient_message
 
